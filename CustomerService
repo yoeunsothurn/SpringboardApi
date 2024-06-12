@@ -1,0 +1,42 @@
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class CustomerService {
+
+    private List<Customer> customers = new ArrayList<>();
+
+    // Method to return all customer records
+    public List<Customer> getAllCustomers() {
+        return customers;
+    }
+
+    // Method to return a customer record with phonenumber
+    public Customer getCustomerByPhonenumber(String phonenumber) {
+        for (Customer customer : customers) {
+            if (customer.getPhonenumber().equals(phonenumber)) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
+    // Method to add a new customer record
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
+    }
+
+    // Method to update a customer record
+    public void updateCustomer(int id, Customer updatedCustomer) {
+        for (Customer customer : customers) {
+            if (customer.getId() == id) {
+                customer.setFirstName(updatedCustomer.getFirstName());
+                customer.setLastName(updatedCustomer.getLastName());
+                customer.setPhonenumber(updatedCustomer.getPhonenumber());
+                break;
+            }
+        }
+    }
+}
